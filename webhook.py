@@ -1,21 +1,56 @@
 import stripe
-from fastapi import FastAPI, Request, HTTPException
+import json
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Request, HTTPException, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from telegram import Bot
+from telegram import Bot, Update
+from telegram.ext import Application
 
 import config
 import database
+from bot import build_bot
 
 stripe.api_key = config.STRIPE_SECRET_KEY
 
-app = FastAPI()
-bot = Bot(token=config.TELEGRAM_BOT_TOKEN)
+# Build the bot application (webhook mode)
+bot_app: Application = build_bot()
 
 
-@app.on_event("startup")
-async def startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
     await database.init_db()
+    await bot_app.initialize()
+    await bot_app.start()
+
+    webhook_url = f"{config.WEBHOOK_URL}/webhook/telegram"
+    await bot_app.bot.set_webhook(
+        url=webhook_url,
+        drop_pending_updates=True
+    )
+    print(f"✅ Telegram webhook set: {webhook_url}")
+    print("✅ Database ready")
+
+    yield
+
+    # Shutdown
+    await bot_app.bot.delete_webhook()
+    await bot_app.stop()
+    await bot_app.shutdown()
+
+
+app = FastAPI(lifespan=lifespan)
+
+
+# ─── Telegram webhook ─────────────────────────────────────────────────────────
+
+@app.post("/webhook/telegram")
+async def telegram_webhook(request: Request):
+    data = await request.json()
+    update = Update.de_json(data, bot_app.bot)
+    await bot_app.process_update(update)
+    return Response(status_code=200)
 
 
 # ─── Stripe webhook ───────────────────────────────────────────────────────────
@@ -40,7 +75,7 @@ async def stripe_webhook(request: Request):
         order = await database.get_order_by_session(session_id)
 
         # Notify customer
-        await bot.send_message(
+        await bot_app.bot.send_message(
             chat_id=chat_id,
             text=(
                 f"✅ *Payment confirmed!*\n\n"
@@ -54,7 +89,7 @@ async def stripe_webhook(request: Request):
         )
 
         # Notify owner
-        await bot.send_message(
+        await bot_app.bot.send_message(
             chat_id=config.TELEGRAM_OWNER_ID,
             text=(
                 f"💰 *NEW PAID ORDER #{order_id}*\n\n"
