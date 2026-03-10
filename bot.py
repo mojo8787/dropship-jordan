@@ -18,10 +18,9 @@ NAME, PHONE, CITY, ADDRESS, COLOR, CONFIRM = range(6)
 
 async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton("🛒 Order Now", callback_data="order")]]
-    await update.message.reply_photo(
-        photo="https://m.media-amazon.com/images/I/71Z5QpEIBNL._AC_SL1500_.jpg",
-        caption=(
-            f"*{config.PRODUCT_NAME}*\n\n"
+    await update.message.reply_text(
+        text=(
+            f"🛋️ *{config.PRODUCT_NAME}*\n\n"
             f"{config.PRODUCT_DESCRIPTION}\n\n"
             f"✅ Hidden magnetic compartment\n"
             f"✅ AC outlet + USB-A + USB-C charging\n"
