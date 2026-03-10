@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Nightstand — Jordan</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ffffff15;
+    }
+
+    header .logo { font-size: 20px; font-weight: 700; color: #a78bfa; }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px 40px;
+      background: linear-gradient(160deg, #1a1a2e 0%, #0f0f0f 60%);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: #a78bfa; }
+
+    .hero p {
+      font-size: 17px;
+      color: #aaa;
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px #a78bfa40;
+      margin-bottom: 40px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 30px #7c3aed60;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px #7c3aed80;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .feature {
+      background: #1a1a2e;
+      border: 1px solid #ffffff10;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .feature .icon { font-size: 36px; margin-bottom: 12px; }
+    .feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature p { font-size: 14px; color: #888; line-height: 1.5; }
+
+    .price-section {
+      text-align: center;
+      padding: 40px 24px 80px;
+    }
+
+    .price-tag {
+      font-size: 52px;
+      font-weight: 900;
+      color: #a78bfa;
+    }
+
+    .price-tag small {
+      font-size: 20px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    .price-note {
+      color: #22c55e;
+      font-size: 15px;
+      margin: 8px 0 28px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #555;
+      font-size: 13px;
+      border-top: 1px solid #ffffff10;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🛋️ SmartDesk JO</div>
+</header>
+
+<section class="hero">
+  <h1>The Nightstand With a <span>Secret</span></h1>
+  <p>Hidden magnetic compartment, built-in charging station, modern design. Delivered straight to your door in Jordan.</p>
+
+  <img
+    class="product-img"
+    src="https://m.media-amazon.com/images/I/71Z5QpEIBNL._AC_SL1500_.jpg"
+    alt="Smart Nightstand"
+  />
+
+  <a class="cta-btn" href="https://t.me/smartdeskjo_bot">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.94 8.19l-2.02 9.52c-.15.68-.54.84-1.08.52l-3-2.21-1.45 1.39c-.16.16-.3.3-.61.3l.21-3.03 5.5-4.97c.24-.21-.05-.33-.37-.12L7.08 14.4l-2.96-.92c-.64-.2-.65-.64.14-.95l11.54-4.45c.53-.19 1 .13.82.95-.02-.02-.02 0 0 0z"/>
+    </svg>
+    Order on Telegram
+  </a>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <div class="icon">🔐</div>
+    <h3>Hidden Compartment</h3>
+    <p>Magnetic card opens a secret drawer — perfect for valuables and privacy.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">⚡</div>
+    <h3>Built-in Charging</h3>
+    <p>AC outlet + USB-A + USB-C. Charge all your devices without desk clutter.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🚚</div>
+    <h3>Delivered to Jordan</h3>
+    <p>Fast international shipping straight to your address across Jordan.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">💳</div>
+    <h3>Secure Payment</h3>
+    <p>Pay safely with any card via Stripe — encrypted and trusted worldwide.</p>
+  </div>
+</section>
+
+<section class="price-section">
+  <div class="price-tag">$250 <small>USD</small></div>
+  <div class="price-note">✅ Free Shipping to Jordan</div>
+  <a class="cta-btn" href="https://t.me/smartdeskjo_bot">
+    🛒 Order Now via Telegram
+  </a>
+</section>
+
+<footer>
+  &copy; 2026 SmartDesk JO · All rights reserved
+</footer>
+
+</body>
+</html>
